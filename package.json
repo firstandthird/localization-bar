@@ -1,0 +1,22 @@
+{
+  "name": "localization-bar",
+  "version": "1.0.0",
+  "description": "Detect a user's browser language and show a message for the user to view pages in their preferred language.",
+  "main": "locailization-bar.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leaninorg/localization-bar.git"
+  },
+  "author": "First+Third",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/leaninorg/localization-bar/issues"
+  },
+  "homepage": "https://github.com/leaninorg/localization-bar#readme",
+  "devDependencies": {
+    "eslint": "^3.12.2"
+  }
+}
