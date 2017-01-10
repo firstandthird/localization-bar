@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/leaninorg/localization-bar.git"
+    "url": "git+https://github.com/firstandthird/localization-bar.git"
   },
   "author": "First+Third",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/leaninorg/localization-bar/issues"
+    "url": "https://github.com/firstandthird/localization-bar/issues"
   },
-  "homepage": "https://github.com/leaninorg/localization-bar#readme",
+  "homepage": "https://github.com/firstandthird/localization-bar#readme",
   "devDependencies": {
     "clientkit-core": "0.0.3",
     "clientkit-eslint": "0.0.1",
