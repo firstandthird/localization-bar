@@ -4,7 +4,8 @@
   "description": "Detect a user's browser language and show a message for the user to view pages in their preferred language.",
   "main": "locailization-bar.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "clientkit-core",
+    "prepublish": "clientkit-core"
   },
   "repository": {
     "type": "git",
@@ -17,6 +18,16 @@
   },
   "homepage": "https://github.com/leaninorg/localization-bar#readme",
   "devDependencies": {
-    "eslint": "^3.12.2"
+    "clientkit-core": "0.0.3",
+    "clientkit-eslint": "0.0.1",
+    "clientkit-scripts": "0.0.2",
+    "eslint-config-firstandthird": "^3.1.0",
+    "eslint-plugin-import": "^2.2.0"
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true
+    },
+    "extends": "firstandthird"
   }
 }
