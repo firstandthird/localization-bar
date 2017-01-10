@@ -1,3 +1,4 @@
+/* eslint-env browser */
 export default class {
   constructor(languageMap, insertSelector = 'body') {
     this.languageMap = languageMap;
