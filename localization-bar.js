@@ -6,8 +6,8 @@ export default class {
   /**
    * Create a language bar
    * @param {Object} languageMap - options associated with each possible language
-   * @param {string=body} insertSelector - selector for where to insert the bar
-   * @param {string=null} language - override the browser's preferred language setting
+   * @param {string} [insertSelector=body] - selector for where to insert the bar
+   * @param {string} [language=null] - override the browser's preferred language setting
    */
   constructor(languageMap, { insertSelector = 'body', language = null } = {}) {
     this.languageMap = languageMap;
