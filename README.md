@@ -34,6 +34,8 @@ const languageMap = {
 
 By default the localization-bar will be appended to the top of the body element. If you would rather insert the bar into another part of the page, simply pass the selector of the element you want to insert before.
 
+You can also override the browser's preferred language setting and pass a preferred language as an parameter when instantiating the class.
+
 When you are ready to add the bar to the page call the `check()` method.
 
 Example:
@@ -54,6 +56,9 @@ const localizationBar = new LanguageBar({
             url: '/fr'
         }
     }
-}, '.wrapper');
+}, {
+    insertSelector: '.wrapper',
+    language: 'es'
+});
 localizationBar.check();
 ```

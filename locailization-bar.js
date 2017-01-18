@@ -1,7 +1,18 @@
+/**
+ * Class representing a language bar used to display a message to a user based on
+ * their browser's preferred language.
+ */
 export default class {
-  constructor(languageMap, insertSelector = 'body') {
+  /**
+   * Create a language bar
+   * @param {Object} languageMap - options associated with each possible language
+   * @param {string=body} insertSelector - selector for where to insert the bar
+   * @param {string=null} language - override the browser's preferred language setting
+   */
+  constructor(languageMap, { insertSelector = 'body', language = null } = {}) {
     this.languageMap = languageMap;
     this.insertSelector = insertSelector;
+    this.language = language;
   }
 
   /**
@@ -9,7 +20,7 @@ export default class {
    * @returns {Object | Boolean} specific language options or false if no language is found
    */
   findLanguage() {
-    const selectedLanguages = navigator.languages || [navigator.userLanguage];
+    const selectedLanguages = [this.language] || navigator.languages || [navigator.userLanguage];
     for (let i = 0; i < selectedLanguages.length; i += 1) {
       const selectedLanguage = selectedLanguages[i].toLowerCase();
       if (selectedLanguage in this.languageMap) {
