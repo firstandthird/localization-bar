@@ -1,3 +1,4 @@
+/* eslint-env browser */
 /**
  * Class representing a language bar used to display a message to a user based on
  * their browser's preferred language.
@@ -35,6 +36,7 @@ export default class {
    */
   check() {
     this.language = this.findLanguage();
+    console.log(this.language);
     if (this.language) {
       this.addHtml();
     }
