@@ -6,7 +6,7 @@
   "scripts": {
     "start": "concurrently 'scriptkit dev --color' 'npm run serve'",
     "serve": "cd example && serve -p 8080",
-    "prepublish": "scriptkit",
+    "prepublish": "scriptkit --env production",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -23,7 +23,7 @@
     "concurrently": "^3.1.0",
     "eslint-config-firstandthird": "^3.1.0",
     "eslint-plugin-import": "^2.2.0",
-    "scriptkit": "0.0.3",
+    "scriptkit": "0.0.4",
     "serve": "^2.4.2"
   },
   "scriptkit": {
