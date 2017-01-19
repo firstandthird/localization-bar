@@ -25,6 +25,7 @@ export default class {
    */
   check() {
     this.language = this.findLanguage();
+    console.log(this.language);
     if (this.language) {
       this.addHtml();
     }
