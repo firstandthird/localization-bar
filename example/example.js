@@ -82,14 +82,29 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /* eslint-env browser */
+/**
+ * Class representing a language bar used to display a message to a user based on
+ * their browser's preferred language.
+ */
 var _class = function () {
+  /**
+   * Create a language bar
+   * @param {Object} languageMap - options associated with each possible language
+   * @param {string} [insertSelector=body] - selector for where to insert the bar
+   * @param {string} [language=null] - override the browser's preferred language setting
+   */
   function _class(languageMap) {
-    var insertSelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'body';
+    var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
+        _ref$insertSelector = _ref.insertSelector,
+        insertSelector = _ref$insertSelector === undefined ? 'body' : _ref$insertSelector,
+        _ref$language = _ref.language,
+        language = _ref$language === undefined ? null : _ref$language;
 
     _classCallCheck(this, _class);
 
     this.languageMap = languageMap;
     this.insertSelector = insertSelector;
+    this.language = language;
   }
 
   /**
@@ -101,7 +116,7 @@ var _class = function () {
   _createClass(_class, [{
     key: 'findLanguage',
     value: function findLanguage() {
-      var selectedLanguages = navigator.languages || [navigator.userLanguage];
+      var selectedLanguages = [this.language] || navigator.languages || [navigator.userLanguage];
       for (var i = 0; i < selectedLanguages.length; i += 1) {
         var selectedLanguage = selectedLanguages[i].toLowerCase();
         if (selectedLanguage in this.languageMap) {
