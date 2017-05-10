@@ -1,4 +1,6 @@
 node_modules
+npm-debug.log
 dist
-example/dist.js
-.idea
+*.dist*
+.idea/
+.DS_Store
