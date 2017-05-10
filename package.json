@@ -4,10 +4,11 @@
   "description": "Detect a user's browser language and show a message for the user to view pages in their preferred language.",
   "main": "dist/localization-bar.js",
   "scripts": {
-    "start": "concurrently 'scriptkit dev --color' 'npm run serve'",
-    "serve": "cd example && serve -p 8080",
-    "prepublish": "scriptkit --env production",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "scriptkit",
+    "build": "scriptkit build",
+    "dev": "scriptkit dev",
+    "test": "cat test/localization-bar.test.dist.js | tape-run --static . --browser phantomjs --render tap-spec",
+    "prepublish": "scriptkit"
   },
   "repository": {
     "type": "git",
@@ -20,22 +21,34 @@
   },
   "homepage": "https://github.com/firstandthird/localization-bar#readme",
   "devDependencies": {
-    "concurrently": "^3.1.0",
-    "eslint-config-firstandthird": "^3.1.0",
-    "eslint-plugin-import": "^2.2.0",
-    "scriptkit": "0.0.4",
-    "serve": "^2.4.2"
-  },
-  "scriptkit": {
-    "scripts": {
-      "dist/localization-bar.js": "localization-bar.js",
-      "example/dist.js": "example/app.js"
-    }
+    "eslint-config-firstandthird": "3.2.0",
+    "eslint-plugin-import": "2.2.0",
+    "phantomjs-prebuilt": "2.1.14",
+    "scriptkit": "0.2.0",
+    "tap-spec": "4.1.1",
+    "tape-rollup": "4.6.4",
+    "tape-run": "2.2.0"
   },
   "eslintConfig": {
     "env": {
       "browser": true
     },
     "extends": "firstandthird"
+  },
+  "scriptkit": {
+    "files": {
+      "dist/localization-bar.js": "index.js",
+      "test/localization-bar.test.dist.js": "test/localization-bar.test.js"
+    },
+    "scripts": {
+      "babel": {
+        "exclude": [
+          "node_modules/tape-rollup/*"
+        ]
+      }
+    }
+  },
+  "dependencies": {
+    "domassist": "^1.9.0"
   }
 }
