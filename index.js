@@ -1,4 +1,6 @@
 /* eslint-env browser */
+import { addClass, findOne, on } from 'domassist';
+
 /**
  * Class representing a language bar used to display a message to a user based on
  * their browser's preferred language.
@@ -18,17 +20,33 @@ export default class {
 
   /**
    * See if a browser preferred language matches a language option
-   * @returns {Object | Boolean} specific language options or false if no language is found
+   * @return {Object | Boolean} specific language options or false if no language is found
    */
   findLanguage() {
-    const selectedLanguages = [this.language] || navigator.languages || [navigator.userLanguage];
+    const selectedLanguages = this.getLanguage();
+
     for (let i = 0; i < selectedLanguages.length; i += 1) {
       const selectedLanguage = selectedLanguages[i].toLowerCase();
+
       if (selectedLanguage in this.languageMap) {
         return this.languageMap[selectedLanguage];
       }
     }
+
     return false;
+  }
+
+  /**
+   * Gets the languages.
+   * @return [String]
+   */
+  getLanguage() {
+    let language = this.language || navigator.languages || navigator.userLanguage;
+    if (!Array.isArray(language)) {
+      language = [language];
+    }
+
+    return language;
   }
 
   /**
@@ -36,6 +54,7 @@ export default class {
    */
   check() {
     this.language = this.findLanguage();
+
     if (this.language) {
       this.addHtml();
     }
@@ -52,23 +71,26 @@ export default class {
 
   createWrapper() {
     const bar = document.createElement('div');
-    bar.classList.add('localization-bar');
+    addClass(bar, 'localization-bar');
+
     if (this.insertSelector === 'body') {
       this.wrapper = document.body.insertBefore(bar, document.body.firstChild);
     } else {
-      const insertionPoint = document.querySelector(this.insertSelector);
+      const insertionPoint = findOne(this.insertSelector);
       this.wrapper = insertionPoint.insertBefore(bar, insertionPoint.firstChild);
     }
   }
 
   createCloseBtn() {
     const button = document.createElement('button');
-    button.classList.add('localization-bar__close');
-    button.innerText = 'X';
-    button.addEventListener('click', (evt) => {
+    addClass(button, 'localization-bar__close');
+    button.setAttribute('aria-label', 'Close');
+    button.innerHTML = '<span aria-hidden="true">X</span>';
+    on(button, 'click', evt => {
       evt.preventDefault();
       this.close();
     });
+
     this.wrapper.appendChild(button);
   }
 
@@ -78,7 +100,7 @@ export default class {
 
   addCopy() {
     const languageCta = document.createElement('a');
-    languageCta.classList.add('localization-bar__cta');
+    addClass(languageCta, 'localization-bar__cta');
     languageCta.href = this.language.cta.url;
     languageCta.innerText = this.language.cta.text;
     this.wrapper.innerText = `${this.language.message} `;
