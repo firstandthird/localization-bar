@@ -79,6 +79,27 @@ test('Should be possible to place the bar anywhere else but the body', assert =>
   teardown();
 });
 
+test('Should be possible to make the whole bar a link', assert => {
+  const lb = boostrap({ barAsLink: true });
+  lb.getLanguage = () => ['es'];
+
+  lb.check();
+
+  const bar = document.querySelector('.localization-bar');
+  const link = bar.querySelector('.localization-bar__cta');
+  const button = bar.querySelector('.localization-bar__close');
+
+  assert.ok(bar instanceof Element, 'Localization bar is present after check');
+  assert.equal(bar.tagName, 'A', 'Bar should be an anchor');
+  assert.ok(bar.href.indexOf('/es') > -1, 'Should contain link to localized version');
+  assert.equal(bar.innerText, 'Ver el sitio en españolX', 'Contains correct text');
+  assert.equal(link, null, 'Inner link should not exist');
+  assert.equal(button.getAttribute('aria-label'), 'Close', 'Button has right aria-label');
+  assert.end();
+
+  teardown();
+});
+
 test('Navigation bar should be closable', assert => {
   const lb = boostrap();
   lb.getLanguage = () => ['es'];

@@ -11,11 +11,13 @@ export default class {
    * @param {Object} languageMap - options associated with each possible language
    * @param {string} [insertSelector=body] - selector for where to insert the bar
    * @param {string} [language=null] - override the browser's preferred language setting
+   * @param {string} [barAsLink=null] - makes the whole bar a link instead just the language
    */
-  constructor(languageMap, { insertSelector = 'body', language = null } = {}) {
+  constructor(languageMap, { insertSelector = 'body', language = null, barAsLink = false } = {}) {
     this.languageMap = languageMap;
     this.insertSelector = insertSelector;
     this.language = language;
+    this.barAsLink = barAsLink;
   }
 
   /**
@@ -70,8 +72,13 @@ export default class {
   }
 
   createWrapper() {
-    const bar = document.createElement('div');
+    const bar = this.barAsLink ?
+        document.createElement('a') : document.createElement('div');
     addClass(bar, 'localization-bar');
+
+    if (this.barAsLink) {
+      bar.href = this.language.cta.url;
+    }
 
     if (this.insertSelector === 'body') {
       this.wrapper = document.body.insertBefore(bar, document.body.firstChild);
@@ -99,11 +106,15 @@ export default class {
   }
 
   addCopy() {
-    const languageCta = document.createElement('a');
-    addClass(languageCta, 'localization-bar__cta');
-    languageCta.href = this.language.cta.url;
-    languageCta.innerText = this.language.cta.text;
-    this.wrapper.innerText = `${this.language.message} `;
-    this.wrapper.appendChild(languageCta);
+    if (this.barAsLink) {
+      this.wrapper.innerText = `${this.language.message} ${this.language.cta.text}`;
+    } else {
+      const languageCta = document.createElement('a');
+      addClass(languageCta, 'localization-bar__cta');
+      languageCta.href = this.language.cta.url;
+      languageCta.innerText = this.language.cta.text;
+      this.wrapper.innerText = `${this.language.message} `;
+      this.wrapper.appendChild(languageCta);
+    }
   }
 }
