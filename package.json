@@ -1,6 +1,6 @@
 {
   "name": "localization-bar",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Detect a user's browser language and show a message for the user to view pages in their preferred language.",
   "main": "dist/localization-bar.js",
   "module": "index.js",
