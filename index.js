@@ -1,5 +1,6 @@
 /* eslint-env browser */
 import { addClass, findOne, on } from 'domassist';
+import CookieMonster from '@firstandthird/cookie-monster';
 
 /**
  * Class representing a language bar used to display a message to a user based on
@@ -11,13 +12,24 @@ export default class {
    * @param {Object} languageMap - options associated with each possible language
    * @param {string} [insertSelector=body] - selector for where to insert the bar
    * @param {string} [language=null] - override the browser's preferred language setting
-   * @param {string} [barAsLink=null] - makes the whole bar a link instead just the language
+   * @param {string} [barAsLink=false] - makes the whole bar a link instead just the language
+   * @param {string} [rememberState=true] - remembers the state of the bar with a cookie
+   * @param {string} [coookieName='localization-bar'] - cookie name to be used to store the state
    */
-  constructor(languageMap, { insertSelector = 'body', language = null, barAsLink = false } = {}) {
+  constructor(languageMap, {
+    insertSelector = 'body',
+    language = null,
+    barAsLink = false,
+    rememberState = true,
+    cookieName = 'localization-bar'
+  } = {}) {
     this.languageMap = languageMap;
     this.insertSelector = insertSelector;
     this.language = language;
     this.barAsLink = barAsLink;
+
+    this.rememberState = rememberState;
+    this.cookieName = cookieName;
   }
 
   /**
@@ -58,6 +70,14 @@ export default class {
     this.language = this.findLanguage();
 
     if (this.language) {
+      if (this.rememberState) {
+        const cookieValue = CookieMonster.get(this.cookieName);
+
+        if (!!cookieValue) {
+          return;
+        }
+      }
+
       this.addHtml();
     }
   }
@@ -103,6 +123,10 @@ export default class {
 
   close() {
     this.wrapper.style.marginTop = `-${this.wrapper.offsetHeight}px`;
+
+    if (this.rememberState) {
+      CookieMonster.set(this.cookieName, 'true');
+    }
   }
 
   addCopy() {

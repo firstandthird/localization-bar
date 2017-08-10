@@ -1,5 +1,6 @@
 /* eslint-env browser */
 import LocalizationBar from '../index';
+import CookieMonster from '@firstandthird/cookie-monster';
 import test from 'tape-rollup';
 
 const langMap = {
@@ -19,12 +20,17 @@ const langMap = {
   },
 };
 
-const boostrap = function(options) {
+const boostrap = function(options = {}) {
+  if (options.rememberState !== false) {
+    options.rememberState = true;
+  }
+
   return new LocalizationBar(langMap, options);
 };
 
 const teardown = function() {
   document.body.innerHTML = '';
+  CookieMonster.remove('localization-bar');
 };
 
 test('Instance should contain valid API', assert => {
@@ -115,11 +121,36 @@ test('Navigation bar should be closable', assert => {
 });
 
 test('Should be possible to force the language', assert => {
-  const lb = boostrap({ language: 'fr' });
+  const lb = boostrap({ language: 'fr', rememberState: false });
 
   lb.check();
   const bar = document.querySelector('.localization-bar');
   assert.equal(bar.innerText, 'Voir le site en françaisX', 'Contains correct text');
+  assert.end();
+  teardown();
+});
+
+test('Close should set a cookie if remembering state', assert => {
+  const lb = boostrap({ rememberState: true });
+  lb.getLanguage = () => ['es'];
+
+  lb.check();
+  const bar = document.querySelector('.localization-bar');
+  const button = bar.querySelector('.localization-bar__close');
+  button.click();
+  assert.equal(CookieMonster.get('localization-bar'), 'true', 'Should have a cookie');
+  assert.end();
+  teardown();
+});
+
+test('Should be possible to use remember state so the bar does not appear if already closed', assert => {
+  const lb = boostrap({ language: 'fr', rememberState: true });
+
+  CookieMonster.set('localization-bar', 'true');
+
+  lb.check();
+  const bar = document.querySelector('.localization-bar');
+  assert.equal(bar, null, 'Bar is not present');
   assert.end();
   teardown();
 });
