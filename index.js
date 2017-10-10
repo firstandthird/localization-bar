@@ -55,9 +55,27 @@ export default class {
    * @return [String]
    */
   getLanguage() {
-    let language = this.language || navigator.languages || navigator.userLanguage;
-    if (!Array.isArray(language)) {
+    let language = this.language ||
+      navigator.languages ||
+      navigator.language ||
+      navigator.userLanguage;
+
+    if (!language) {
+      language = [];
+    } else if (!Array.isArray(language)) {
       language = [language];
+    }
+
+    if (language.length) {
+      language = language.map(l => {
+        if (l.indexOf('-') > -1) {
+          l = l.split('-').shift();
+        } else if (l.indexOf('_') > -1) {
+          l = l.split('_').shift();
+        }
+
+        return l.toLowerCase();
+      });
     }
 
     return language;
