@@ -12,8 +12,8 @@ export default class {
    * @param {Object} languageMap - options associated with each possible language
    * @param {string} [insertSelector=body] - selector for where to insert the bar
    * @param {string} [language=null] - override the browser's preferred language setting
-   * @param {string} [barAsLink=false] - makes the whole bar a link instead just the language
-   * @param {string} [rememberState=true] - remembers the state of the bar with a cookie
+   * @param {boolean} [barAsLink=false] - makes the whole bar a link instead just the language
+   * @param {boolean} [rememberState=true] - remembers the state of the bar with a cookie
    * @param {string} [coookieName='localization-bar'] - cookie name to be used to store the state
    */
   constructor(languageMap, {
