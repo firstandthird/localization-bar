@@ -15,6 +15,8 @@ npm install localization-bar
 ### JavaScript
 ```js
 import 'localization-bar'
+// or
+import LocalizationBar from 'localization-bar'
 ```
 
 Import the class into your javascript. You'll then need to pass an object containing the options for the languages you want to use. Each language needs the following options.
