@@ -13,6 +13,7 @@ npm install localization-bar
 ## Usage
 
 ### JavaScript
+
 ```js
 import 'localization-bar'
 // or
@@ -28,7 +29,7 @@ Import the class into your javascript. You'll then need to pass an object contai
 
 Here is an example of what the object would look like.
 
-```javascript
+```js
 const languageMap = {
     es: {
       message: 'Ver el sitio en',
@@ -55,7 +56,7 @@ When you are ready to add the bar to the page call the `check()` method.
 
 Example:
 
-```javascript
+```js
 const localizationBar = new LanguageBar({
     es: {
         message: 'Ver el sitio en',
@@ -75,5 +76,6 @@ const localizationBar = new LanguageBar({
     insertSelector: '.wrapper',
     language: 'es'
 });
+
 localizationBar.check();
 ```
