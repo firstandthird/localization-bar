@@ -1,19 +1,35 @@
 # Localization Bar
 
+![npm](https://img.shields.io/npm/v/localization-bar.svg)
+
 Detect a user's browser language and show a message for the user to view pages in their preferred language.
 
+## Installation
+
+```sh
+npm install localization-bar
+```
+
 ## Usage
+
+### JavaScript
+
+```js
+import 'localization-bar'
+// or
+import LocalizationBar from 'localization-bar'
+```
 
 Import the class into your javascript. You'll then need to pass an object containing the options for the languages you want to use. Each language needs the following options.
 
 * message - the copy shown in the bar
 * cta - an object that contains
-    * text - text displayed for the cta
-    * url - url to the translated pages
-    
+* text - text displayed for the cta
+* url - url to the translated pages
+
 Here is an example of what the object would look like.
 
-```javascript
+```js
 const languageMap = {
     es: {
       message: 'Ver el sitio en',
@@ -40,7 +56,7 @@ When you are ready to add the bar to the page call the `check()` method.
 
 Example:
 
-```javascript
+```js
 const localizationBar = new LanguageBar({
     es: {
         message: 'Ver el sitio en',
@@ -60,5 +76,6 @@ const localizationBar = new LanguageBar({
     insertSelector: '.wrapper',
     language: 'es'
 });
+
 localizationBar.check();
 ```
