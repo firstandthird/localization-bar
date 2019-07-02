@@ -57,7 +57,7 @@ When you are ready to add the bar to the page call the `check()` method.
 Example:
 
 ```js
-const localizationBar = new LanguageBar({
+const localizationBar = new LocalizationBar({
     es: {
         message: 'Ver el sitio en',
         cta: {

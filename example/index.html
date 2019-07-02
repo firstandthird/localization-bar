@@ -58,9 +58,9 @@
     <p>If you have a preferred language set in your browser that matches either French or Spanish you will see a bar letting you know that translated pages exist.</p>
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis molestias, iste sed minus corrupti voluptate adipisci perferendis, voluptates minima non ea provident velit. Quos aut asperiores excepturi, quis, inventore reiciendis.</p>
   </div>
-  <script src="../dist/localization-bar.js"></script>
+  <script src="../dist/localization-bar.bundle.js"></script>
   <script>
-    const localizationBar = new LocalizationBar({
+    const languageBar = new localizationBar({
       es: {
         message: 'Ver el sitio en',
         cta: {
@@ -77,7 +77,7 @@
       },
     });
 
-    localizationBar.check();
+    languageBar.check();
   </script>
 </body>
 </html>
